@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // All your existing element variables
+
     const ageInput = document.getElementById("age");
     const weightInput = document.getElementById("weight");
     const heightInput = document.getElementById("height");
@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton2 =  document.getElementById('next_page2');
     const nextButton3 =  document.getElementById('next_page3');
     const weightGoal = document.getElementById('weight_goal');
-    const hoursGoal = document.getElementById('hours_goal');
     const prevButton1 = document.getElementById('prev_page1');
     const prevButton2 = document.getElementById('prev_page2');
     const speedValue = document.getElementById('speed_value');
@@ -44,16 +43,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const break6 = document.getElementById('break6');
     const break7 = document.getElementById('break7');
     const break8 = document.getElementById('break8');
+    const startupButton = document.getElementById('create_plan');
+    const repnImg = document.getElementById('repn_img');
+    const repnTxt = document.getElementById('repn_init_text');
     
-    // This variable is correct
+
     const bedTimeInput = document.getElementById('bed_time'); 
     const weightGoalInput = document.getElementById('weight_goal');
     
-    // NEW: RECALCULATE BUTTON
+
     const recalculateBtn = document.getElementById('recalculate-btn');
 
+    startupButton.addEventListener('click', function() {
+        startupButton.classList.add('is-hidden');
+        repnImg.classList.add('is-hidden');
+        repnTxt.classList.add('is-hidden');
+        ageInput.classList.remove('is-hidden');
+        weightInput.classList.remove('is-hidden');
+        heightInput.classList.remove('is-hidden');
+        sexGroup.classList.remove('is-hidden');
+        nextButton1.classList.remove('is-hidden');
+        initText.classList.remove('is-hidden');
+        infoText.classList.remove('is-hidden');
 
-    // All your existing button listeners (no changes here)
+    });
+
+
     nextButton1.addEventListener('click', function() {
         workoutGroup.classList.remove('is-hidden');
         ageInput.classList.add('is-hidden');
@@ -73,8 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
         break6.classList.add('is-hidden');
         break8.classList.add('is-hidden');
         
-        // --- FIX 1: Sleep question is NOT on this page ---
-        // (Removed line that hid sleep_group)
+        
+
     });
 
     prevButton1.addEventListener('click', function() {
@@ -89,8 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         weightGoal.classList.add('is-hidden');
         prevButton1.classList.add('is-hidden');
         
-        // --- FIX 2: Sleep question is NOT on this page ---
-        // (Removed line that showed sleep_group)
+
         
         break1.classList.remove('is-hidden');
         break2.classList.remove('is-hidden');
@@ -111,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         nextButton3.classList.remove('is-hidden');
         break7.classList.add('is-hidden');
         
-        // --- FIX 3: SHOW sleep question on Page 3 ---
+
         document.getElementById('sleep_group').classList.remove('is-hidden'); 
 
         if (goalValue.value=='bulk') {
@@ -144,11 +158,11 @@ document.addEventListener('DOMContentLoaded', function() {
         planGroup.classList.add('is-hidden');
         break7.classList.remove('is-hidden');
         
-        // --- FIX 4: HIDE sleep question when going back to Page 2 ---
+
         document.getElementById('sleep_group').classList.add('is-hidden'); 
     });
 
-    // Your loading animation listener (no changes)
+    
     nextButton3.addEventListener('click', function() {
         prevButton2.classList.add('is-hidden');
         nextButton3.classList.add('is-hidden');
@@ -159,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
         infoText.classList.add('is-hidden');
         loadImage.classList.remove('is-hidden');
         
-        // --- FIX 5: HIDE sleep question during loading ---
+        
         document.getElementById('sleep_group').classList.add('is-hidden'); 
         welcomeBox.style = "background-color: black;";
 
@@ -188,19 +202,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }, loadTextDuration);
     });
 
-    // --- NEW: Form Reset Function ---
+    
     function resetForm() {
-        // Show Page 1
+        
         ageInput.classList.remove('is-hidden');
         weightInput.classList.remove('is-hidden');
         heightInput.classList.remove('is-hidden');
         sexGroup.classList.remove('is-hidden');
         
-        // --- FIX 6: HIDE sleep question on reset ---
+        
         document.getElementById('sleep_group').classList.add('is-hidden');
         nextButton1.classList.remove('is-hidden');
 
-        // Hide all other pages and elements
+        
         workoutGroup.classList.add('is-hidden');
         goalGroup.classList.add('is-hidden');
         nextButton2.classList.add('is-hidden');
@@ -214,10 +228,10 @@ document.addEventListener('DOMContentLoaded', function() {
         initText.classList.remove('is-hidden');
         infoText.classList.remove('is-hidden');
 
-        // Reset welcome box color
+        
         welcomeBox.style = "background-color: #333;";
 
-        // Reset all <br> tags
+        
         break1.classList.remove('is-hidden');
         break2.classList.remove('is-hidden');
         break3.classList.remove('is-hidden');
@@ -228,32 +242,32 @@ document.addEventListener('DOMContentLoaded', function() {
         break8.classList.remove('is-hidden');
     }
 
-    // --- NEW: Recalculate Button Listener ---
+    
     recalculateBtn.addEventListener('click', function(e) {
-        e.preventDefault(); // Stop the link from acting like a link
+        e.preventDefault(); 
         
-        // Hide dashboard
+        
         document.getElementById('dashboard_container').classList.add('is-hidden');
 
-        // Show welcome box
+        
         welcomeBox.classList.remove('is-hidden');
         
-        // Reset body background
+        
         body.style = "background-color: #00031c;";
 
-        // Reset the form to page 1
+        
         resetForm();
     });
 
 
-    // --- Your existing API call function (no changes) ---
+    
     async function callBackendAPI() {
         console.log("Gathering data and calling backend...");
 
-        // --- FIX 7: Corrected this map ---
+        
         const activityMap = {
             'lightly_active': 'lightly active',
-            'active': 'active', // <-- This was the missing key
+            'active': 'active', 
             'very_active': 'very active',
             'extra_active': 'extra active'
         };
@@ -273,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const plan = planMap[planValue.value];
         const final_weight = parseFloat(weightGoalInput.value) || weight; 
         
-        // --- This variable is now correct ---
+        
         const bed_time = bedTimeInput.value; 
 
         const nutritionData = { age, gender, weight, height, activity, goal, loss_speed };
@@ -334,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-// --- MODIFIED: generatePlan Listener ---
+
     document.addEventListener('generatePlan', async function() {
         
         const planData = await callBackendAPI();
@@ -346,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('dashboard_container').classList.remove('is-hidden');
             body.style = "background-color: #0B0F19;"; 
             
-            // --- A. Populate Nutrition Card ---
+            
             const nutrition = planData.nutrition;
             const macros = nutrition.macronutrients;
             const otherInfo = nutrition.other_info;
@@ -371,12 +385,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p style="color: #00A9FF; margin-top: 10px;">Target Date: <strong>${targetDate}</strong></p>
             `;
             
-            // --- B. Populate Sleep Card ---
+            
             const wakeTime = planData.sleep.wake_up_time;
             document.getElementById('wake-up-time').textContent = wakeTime;
 
 
-            // --- C. Populate Weekly Workout Plan (Option 1) ---
+            
             const workout1 = planData.workout.option_1;
             const workoutName1 = workout1.name || "PUSH-PULL-LEGS";
             document.getElementById('workout-split-name-1').textContent = workoutName1;
@@ -398,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 tagsContainer1.appendChild(tag);
             });
 
-            // --- D. Populate the Full Exercise List (Option 1) ---
+            
             const schedule1 = workout1.schedule; 
             const workoutContainer1 = document.getElementById('workout-plan-container-1');
             workoutContainer1.innerHTML = ''; 
@@ -425,17 +439,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 workoutContainer1.appendChild(dayEl);
             });
 
-            // --- NEW: LOGIC TO HIDE/SHOW OPTION 2 ---
+            
             const workout2 = planData.workout.option_2;
             const dashGrid = document.querySelector('.dash-grid');
             const workoutCard2 = document.getElementById('workout-card-2');
 
             if (workout2.name === "") {
-                // If no name, hide the card and change the grid
+            
                 workoutCard2.classList.add('is-hidden');
                 dashGrid.style.gridTemplateColumns = '2fr 3fr';
             } else {
-                // Else, show the card, reset the grid, and populate the data
                 workoutCard2.classList.remove('is-hidden');
                 dashGrid.style.gridTemplateColumns = '2fr 3fr 3fr';
 
@@ -487,11 +500,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
         } else {
-            // If the API call failed, reset the UI
             console.log("API call failed. Resetting to form.");
             alert('There was an error generating your plan. Please try again.');
-            resetForm(); // Reset the form to page 1
+            resetForm(); 
         }
     });
-
 });

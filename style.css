@@ -1,113 +1,120 @@
 body {
-    background-color: #0B0F19; /* New dark background */
+    background-color: #0B0F19; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    color: #ffffff; /* <-- Default white text */
+    color: #ffffff; 
 }
 
-/* Main Container/Welcome Box */
+
 .welcome_box {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer, deeper shadow */
-    width: 90%; /* Increase width slightly for better mobile viewing */
-    max-width: 480px; /* Set a max-width for large screens */
-    /* Remove fixed height to allow content to dictate size */
-    margin: 40px auto; /* More margin on top/bottom */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 90%; 
+    max-width: 480px; 
+    
+    margin: 40px auto;
     padding: 30px;
     text-align: center;
-    background-color: #333; /* Clean white background */
-    border: none; /* Remove border */
-    border-radius: 16px; /* Increased radius for a softer look */
+    background-color: #333; 
+    border: none; 
+    border-radius: 16px; 
     transition: transform 0.3s ease-in-out;
     box-shadow: 0 0 20px rgba(17, 152, 210, 0.9);
 }
 
-/* Optional: Slight lift on hover */
+
 .welcome_box:hover {
     transform: translateY(-2px);
 }
 
-/* Initial Text/Header */
+
 .init_text {
     font-size: 38px;
-    color: #00A9FF; /* Professional blue primary color */
+    color: #00A9FF; 
     margin-bottom: 5px;
     font-weight: 600;
     text-shadow: 0 0 30px rgba(17, 152, 210, 0.6);
 }
 
-/* Info Text */
+
 .info_txt {
-    color: #ffffff; /* Muted grey for supporting text */
+    color: #ffffff;
     margin-bottom: 25px;
     font-size: 16px;
 }
+.init-startup{
+    width: 150px;
+    height: 120px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 20px rgba(17, 152, 210, 0.9);
+}
 
-/* Input Fields (Age, Weight, Height, Goals) */
 .attribute {
-    margin: 10px 0; /* Vertical margin only */
-    width: 55%; /* Full width of the container */
-    padding: 15px; /* Increased padding */
-    text-align: center; /* Text alignment inside the input */
+    margin: 10px 0;
+    width: 55%; 
+    padding: 15px; 
+    text-align: center; 
     font-size: 18px;
     font-weight: bold;
-    border: 1px solid #ced4da; /* Subtle grey border */
+    border: 1px solid #ced4da; 
     border-radius: 8px;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box; 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     
 }
 
-/* Input Focus State */
+
 .attribute:focus {
     border: 3px solid #007bff;
-    box-shadow: 0 0 20px rgba(17, 152, 210, 0.9); /* Blue focus ring */
-    outline: none; /* Remove default outline */
+    box-shadow: 0 0 20px rgba(17, 152, 210, 0.9); 
+    outline: none; 
 }
 
-/* Buttons */
+
 .button1 {
-    margin-top: 20px;
+    margin-top: 50px;
     width: 100%;
     max-width: 300px;
-    height: 55px; /* Slightly reduced height */
+    height: 55px; 
     font-size: 20px;
-    color: #ffffff; /* White text on button */
-    /* Fades from a dark gray to your glowing blue */
-    background-image: linear-gradient(90deg, #00aaff, #007bff); /* Primary blue button color */
-    border: 1px solid #007bff; /* Solid blue border */
+    color: #ffffff; 
+    
+    background-image: linear-gradient(90deg, #00aaff, #007bff); 
+    border: 1px solid #007bff; 
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
     transition: background-image 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
     cursor: pointer;
     font-weight: 600;
+
     
 
 }
 
-/* Button Hover State */
+
 .button1:hover {
-    background-image: linear-gradient(90deg, #0078b4, #007bff); /* Darker blue on hover */
+    background-image: linear-gradient(90deg, #0078b4, #007bff);
     box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
     
 }
 
-/* Button Active/Click State */
+
 .button1:active {
-    background-color: #004085; /* Even darker blue */
-    transform: translateY(2px); /* Simulate a press down */
+    background-color: #004085; 
+    transform: translateY(2px); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Questions Text */
+
 .question {
     font-size: 18px;
-    color: #00A9FF; /* Darker text for main questions */
+    color: #00A9FF; 
     margin-top: 15px;
     margin-bottom: 8px;
     font-weight: 500;
     text-shadow: 0 0 20px rgba(17, 152, 210, 0.7);
 }
 
-/* Select Dropdowns */
+
 .value {
     width: 100%;
     max-width: 250px;
@@ -119,8 +126,7 @@ body {
     border-radius: 8px;
     background-color: #fff;
     cursor: pointer;
-    appearance: none; /* Remove default system styling for a cleaner look */
-    /* Add a custom arrow if desired (not included here for simplicity) */
+    appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23888'%3E%3Cpath d='M8 12L0 4h16z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
@@ -131,50 +137,44 @@ body {
     box-shadow: 0 0 15px rgba(17, 152, 210, 1);
     border: 0px;
 }
-/* Loading Text */
+
 .load_text {
     color: #007bff;
-    font-size: 32px; /* Smaller, cleaner loading text */
+    font-size: 32px; 
     font-weight: 600;
     margin-top: 30px;
 }
 
-/* --- Loading Image --- */
-/* --- Loading Image --- */
-/* --- Fix for Loading Screen --- */
 .load_text {
-    text-align: center; /* This will center the text */
+    text-align: center; 
 }
 
 .load_img {
     display: block;
-    margin: 30px auto 0 auto; /* This will center the image */
+    margin: 30px auto 0 auto; 
 }
 
-/* Top Menu (Post-generation) */
+
 .top_menu {
     width: 100%;
-    height: 70px; /* Fixed height for a header bar */
+    height: 70px;
     text-align: center;
-    background-color: #212529; /* Dark, contrasting color for a sleek header */
+    background-color: #212529; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding-top: 10px;
     box-sizing: border-box;
 }
 
-/* Utility Class */
+
 .is-hidden {
     display: none;
 }
 
 
-/* --- REPIN DASHBOARD STYLES --- */
 
-/* New Body Background */
-/* This will be set by JS, but good to have a fallback */
 body.dashboard-active {
-    background-color: #0B0F19; /* The dark blue from the image */
+    background-color: #0B0F19; 
 }
 
 #dashboard_container {
@@ -183,7 +183,7 @@ body.dashboard-active {
     padding: 0 2rem;
 }
 
-/* 1. Navigation Bar */
+
 .dash-nav {
     display: flex;
     justify-content: space-between;
@@ -191,21 +191,21 @@ body.dashboard-active {
     padding: 1.5rem 0;
 }
 
-/* Updated logo container to use Flexbox */
+
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 12px; /* This adds space between the logo and the text */
+    gap: 12px; 
 }
 
-/* New rule for the logo image */
+
 .nav-logo-img {
-    height: 60px; /* You can adjust this size */
-    border-radius: 8px; /* This makes the corners rounded */
+    height: 60px;
+    border-radius: 8px; 
     box-shadow: 0 0 20px rgba(17, 152, 210, 0.9);
 }
 
-/* New rule for the logo text */
+
 .nav-logo-text {
     font-size: 1.5rem;
     font-weight: bold;
@@ -225,24 +225,24 @@ body.dashboard-active {
 .nav-links .nav-link:hover {
     color: #fff;
 }
-/* 2. Dashboard Grid */
+
 .dash-grid {
     display: grid;
-    grid-template-columns: 2fr 3fr 3fr; /* 3-column layout */
+    grid-template-columns: 2fr 3fr 3fr; 
     gap: 1.5rem;
     margin-top: 1rem;
 }
 
-/* Base Card Style */
+
 .dash-card {
-    background-color: #161A25; /* Dark card color */
+    background-color: #161A25;
     border-radius: 20px;
     padding: 1.5rem;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 15px rgba(17, 152, 210, 0.7);
 }
 
-/* Column 1: Nutrition & Sleep */
+
 .dash-column-1 {
     display: flex;
     flex-direction: column;
@@ -268,13 +268,13 @@ body.dashboard-active {
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
-    color: #00A9FF; /* Blue text */
+    color: #00A9FF; 
     font-weight: bold;
 }
 
-/* Column 2: Workout Plan */
+
 .workout-card {
-    background-color: #1C212E; /* Slightly different card color */
+    background-color: #1C212E; 
 }
 .workout-card h2 {
     font-size: 1.5rem;
@@ -301,7 +301,7 @@ body.dashboard-active {
     cursor: pointer;
 }
 .muscle-btn.active {
-    background: #00A9FF; /* Active blue */
+    background: #00A9FF; 
 }
 
 .weekly-plan {
@@ -340,7 +340,7 @@ body.dashboard-active {
 .workout-tag.pull { background: #00A9FF; color: #004466; }
 .workout-tag.legs { background: #3EFF8B; color: #006622; }
 
-/* Column 3: Start Button */
+
 .start-card {
     display: flex;
     flex-direction: column;
@@ -374,12 +374,13 @@ body.dashboard-active {
     box-shadow: 0 0 30px rgba(0, 169, 255, 0.5);
 }
 
-/* --- NEW STYLES FOR WORKOUT LIST --- */
 
-#workout-plan-container {
-    max-height: 400px; /* Set a max height */
-    overflow-y: auto; /* Add a scrollbar if it gets too long */
-    padding-right: 10px; /* Space for the scrollbar */
+
+#workout-plan-container-1,
+#workout-plan-container-2 {
+    max-height: 400px; 
+    overflow-y: auto; 
+    padding-right: 10px; 
 }
 
 .workout-day {
@@ -419,7 +420,7 @@ body.dashboard-active {
     text-align: right;
     line-height: 1.4;
 }
-/* Hide the redundant workout tags */
+
 #weekly-plan-tags-1,
 #weekly-plan-tags-2 {
     display: none;

@@ -7,11 +7,11 @@ from dateutil.relativedelta import relativedelta
 MONTH = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
 OPTIMAL_SLEEP = 8.5 #hours
 
-# --- 1. SETUP FLASK APP ---
-app = Flask(__name__)
-CORS(app) # Enable all cross-origin requests
 
-# --- 2. YOUR HELPER CLASS (MODIFIED) ---
+app = Flask(__name__)
+CORS(app) 
+
+
 class Exercice:
     def __init__(self,name, reps, sets, rest_time, weight ):
         self.name = name
@@ -20,7 +20,7 @@ class Exercice:
         self.rest_time = rest_time
         self.weight = weight
     
-    # This method converts your object into a dictionary
+
     def to_dict(self):
         return {
             "name": self.name,
@@ -30,25 +30,23 @@ class Exercice:
             "weight": self.weight
         }
 
-# --- 3. YOUR ENTIRE CODEBASE ---
 
-# --- FIX: Hardened this function to prevent crashes ---
 def burned_calories(age, gender, weight, height, activity):
     if gender == 'male':
         BMR = 10*weight + 6.25*height - 5*age +5
     else:
         BMR = 10*weight + 6.25*height - 5*age - 161
     
-    # Use a proper if/elif/else chain to guarantee a return
+
     if activity == 'sedentary':
         return BMR * 1.2
-    elif activity == 'lightly active':# 1-3 days
+    elif activity == 'lightly active':# 2 days
         return BMR * 1.375
-    elif activity == 'active':# 3-5
+    elif activity == 'active':# 5
         return BMR * 1.55
-    elif activity == 'very active':# 6-7
+    elif activity == 'very active':# 6
         return BMR * 1.725
-    elif activity == 'extra active':# 2x/day
+    elif activity == 'extra active':# 2x/ 6 day
         return BMR * 1.9
     else:
         # Default case if activity is None or invalid
@@ -99,7 +97,7 @@ def sodium_intake():
     return 2300
 
 def water_intake():
-    return 2 # Or any logic you want here
+    return 2 
 
 def goal_calories(age, gender, init_weight, loss_speed , height, activity, goal):
     mod_cal = 0 # Default for maintain
@@ -123,9 +121,9 @@ def split_picker(activity):
     
     split = ['Push-Pull-Legs', 'Arnold-Split', 'Upper-Lower', 'Full-Body', 'Cardio']
     second_chosen_split = ''
-    if activity == 'lightly active':# 1-2 days
+    if activity == 'lightly active':# 2 days
         first_chosen_split = split[3]
-    elif activity == 'active':# 3-5
+    elif activity == 'active':# 5
         first_chosen_split = split[1]+' '+split[2]
         second_chosen_split = split[0]+' '+split[2]
     elif activity == 'very active':# 6
@@ -147,14 +145,14 @@ def exercice_giver(activity):
     biceps_exercices = ['Hammer Curls', 'Incline Dumbell Curls', 'Preacher Curls', 'Reverse Curls', 'Forearm Curls']
     shoulders_exercices = ['Lateral Raises', 'Machine Shoulder Press']
     leg_exercices = ['Hack Squats', 'RDL', 'Leg Curls', 'Leg Extensions', 'Adductors', 'Calves Raises']
-    cardio = ['treadmill'] # This is your original lowercase
+    cardio = ['treadmill'] 
     option_1, option_2 = split_picker(activity)
 
     option_1_split = option_1.split(' ')
     option_2_split = option_2.split(' ')
     
-    exercice_chosen_1 = [] # Initialize
-    exercice_chosen_2 = [] # Initialize
+    exercice_chosen_1 = [] 
+    exercice_chosen_2 = [] 
 
     
     if option_1_split[0] == 'Arnold-Split':
@@ -204,7 +202,7 @@ def schedule_builder(plan):
         reps = '12-15'
         sets = '3'
         rest_time = '1m'
-    else: # 'hybrid' or default
+    else: 
         reps = '8-12'
         sets = '2-3'
         rest_time = '1m 30s'
@@ -218,7 +216,6 @@ def weight_picker(init_weight,plan):
     shoulders_exercices = ['Lateral Raises', 'Machine Shoulder Press']
     leg_exercices = ['Hack Squats', 'RDL', 'Leg Curls', 'Leg Extensions', 'Adductors', 'Calves Raises']
     
-    # --- REVERTED: Back to your original 'Treadmill' (uppercase) ---
     cardio_exercices = ['Treadmill']
 
     all_exercices = [chest_exercices, triceps_exercices, back_exercices, biceps_exercices, shoulders_exercices, leg_exercices, cardio_exercices]
@@ -230,7 +227,6 @@ def weight_picker(init_weight,plan):
     shoulders_dict = {'Lateral Raises': round(init_weight*0.17), 'Machine Shoulder Press': round(init_weight*0.6)}
     legs_dict = {'Hack Squats': round(init_weight*1.2), 'RDL': round(init_weight*0.55), 'Leg Curls': round(init_weight), 'Leg Extensions': round(init_weight*0.9), 'Adductors': round(init_weight*0.65), 'Calves Raises': round(init_weight*0.27)}
     
-    # --- REVERTED: Back to your original 'Treadmill' (uppercase) ---
     cardio_dict = {'Treadmill': '45min Incline Walk'} 
 
     dict_list = [chest_dict,triceps_dict, back_dict, biceps_dict, shoulders_dict, legs_dict, cardio_dict]
@@ -244,7 +240,6 @@ def weight_picker(init_weight,plan):
                for key, value in dict_item.items():
                    if j == key:
                        weight = value 
-                       # --- REVERTED: Back to your original 'treadmill' (lowercase) check ---
                        if j == 'treadmill':
                            planned_exercice_list.append(Exercice(j, 'N/A', '1', 'N/A', weight))
                        else:
@@ -257,7 +252,7 @@ def actual_split(init_weight, plan, activity):
     planned_exercice_list = weight_picker(init_weight, plan)
     given_exercice_1, given_exercice_2 = exercice_giver(activity)
     
-    # Process Option 1
+
     for day_list in given_exercice_1:
         day_plan = []
         for exercice_name in day_list:
@@ -267,7 +262,7 @@ def actual_split(init_weight, plan, activity):
                     break 
         actual_exercice_list_1.append(day_plan)
             
-    # Process Option 2
+
     for day_list in given_exercice_2:
         day_plan = []
         for exercice_name in day_list:
@@ -350,7 +345,7 @@ def sleep(bed_time):
     return display_time + ' ' + wake_am_pm
 
 
-# --- 4. API ENDPOINTS ---
+
 
 @app.route('/api/nutrition-plan', methods=['POST'])
 def get_nutrition_plan():
@@ -462,6 +457,5 @@ def get_sleep_calc():
         return jsonify({"error": f"Error calculating sleep: {str(e)}"}), 400
 
 
-# --- 5. RUN THE SERVER ---
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
