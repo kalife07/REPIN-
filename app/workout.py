@@ -29,7 +29,7 @@ def exercice_giver(activity):
     biceps_exercices = ['Hammer Curls', 'Incline Dumbell Curls', 'Preacher Curls', 'Reverse Curls', 'Forearm Curls']
     shoulders_exercices = ['Lateral Raises', 'Machine Shoulder Press']
     leg_exercices = ['Hack Squats', 'RDL', 'Leg Curls', 'Leg Extensions', 'Adductors', 'Calves Raises']
-    cardio = ['treadmill'] 
+    cardio = ['Treadmill']
     option_1, option_2 = split_picker(activity)
 
     option_1_split = option_1.split(' ')
@@ -40,7 +40,8 @@ def exercice_giver(activity):
 
     
     if option_1_split[0] == 'Arnold-Split':
-        exercice_chosen_1 = [chest_exercices + back_exercices] + [shoulders_exercices + biceps_exercices + triceps_exercices] + [leg_exercices]
+        # Copy the leg list so adding cardio below doesn't change it for option 2
+        exercice_chosen_1 = [chest_exercices + back_exercices] + [shoulders_exercices + biceps_exercices + triceps_exercices] + [leg_exercices[:]]
         if len(option_1_split) > 1:
             if option_1_split[1] == 'Upper-Lower':
                 exercice_chosen_1 += ([chest_exercices[:2]+back_exercices[1:3]+[shoulders_exercices[0]]+biceps_exercices[1:3]+[triceps_exercices[0]]]+[leg_exercices])
@@ -62,7 +63,7 @@ def exercice_giver(activity):
     
     if option_2 != '':
         if option_2_split[0] == 'Push-Pull-Legs':
-            exercice_chosen_2 = [chest_exercices + shoulders_exercices + triceps_exercices] + [back_exercices + biceps_exercices] + [leg_exercices]
+            exercice_chosen_2 = [chest_exercices + shoulders_exercices + triceps_exercices] + [back_exercices + biceps_exercices] + [leg_exercices[:]]
             if len(option_2_split) > 1:
                 if option_2_split[1] == 'Upper-Lower':
                     exercice_chosen_2 += ([chest_exercices[:2]+back_exercices[1:3]+[shoulders_exercices[0]]+biceps_exercices[1:3]+[triceps_exercices[0]]]+[leg_exercices])
@@ -124,7 +125,7 @@ def weight_picker(init_weight,plan):
                for key, value in dict_item.items():
                    if j == key:
                        weight = value 
-                       if j == 'treadmill':
+                       if j == 'Treadmill':
                            planned_exercice_list.append(Exercice(j, 'N/A', '1', 'N/A', weight))
                        else:
                            planned_exercice_list.append(Exercice(j, reps, sets, rest_time, weight))

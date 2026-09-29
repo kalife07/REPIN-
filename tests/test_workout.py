@@ -59,13 +59,12 @@ class TestExerciceGiver:
     def test_extra_active_adds_cardio_to_every_day(self):
         option_1, option_2 = exercice_giver('extra active')
         for day in option_1 + option_2:
-            assert day[-1].lower() == 'treadmill'
+            assert day[-1] == 'Treadmill'
 
-    @pytest.mark.xfail(strict=True, reason="Bug: both options share the same leg list, so cardio is added to leg days twice")
     def test_extra_active_adds_cardio_only_once_per_day(self):
         option_1, option_2 = exercice_giver('extra active')
         for day in option_1 + option_2:
-            assert [name.lower() for name in day].count('treadmill') == 1
+            assert day.count('Treadmill') == 1
 
     def test_calling_twice_gives_same_result(self):
         # Guards against exercise lists being modified between calls
@@ -109,9 +108,8 @@ class TestWeightPicker:
         bench = next(e for e in weight_picker(80, plan) if e.name == 'Flat Bench Press')
         assert (bench.reps, bench.sets, bench.rest_time) == (reps, sets, rest_time)
 
-    @pytest.mark.xfail(strict=True, reason="Bug: cardio check looks for 'treadmill' but the exercise is 'Treadmill'")
     def test_cardio_has_no_reps_or_rest(self):
-        treadmill = next(e for e in weight_picker(80, 'strength') if e.name.lower() == 'treadmill')
+        treadmill = next(e for e in weight_picker(80, 'strength') if e.name == 'Treadmill')
         assert (treadmill.reps, treadmill.sets, treadmill.rest_time) == ('N/A', '1', 'N/A')
 
 
@@ -132,14 +130,12 @@ class TestActualSplit:
         plan_1, _ = actual_split(80, 'muscle', 'very active')
         assert [[e.name for e in day] for day in plan_1] == given_1
 
-    @pytest.mark.xfail(strict=True, reason="Bug: 'treadmill' never matches 'Treadmill', so cardio is dropped from every plan")
     @pytest.mark.parametrize('activity', ['sedentary', 'extra active'])
     def test_cardio_is_kept_in_plan(self, activity):
         plan_1, plan_2 = actual_split(80, 'muscle', activity)
-        names = [e.name.lower() for day in plan_1 + plan_2 for e in day]
-        assert 'treadmill' in names
+        names = [e.name for day in plan_1 + plan_2 for e in day]
+        assert 'Treadmill' in names
 
-    @pytest.mark.xfail(strict=True, reason="Bug: cardio is dropped, so the sedentary 'Cardio' option has empty days")
     def test_no_empty_days(self):
         plan_1, plan_2 = actual_split(80, 'muscle', 'sedentary')
         assert all(len(day) > 0 for day in plan_1 + plan_2)

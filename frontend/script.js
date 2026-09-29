@@ -427,9 +427,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         <li>
                             <strong>${exercise.name}</strong>
                             <span>
+                                ${exercise.reps === 'N/A' ? exercise.weight : `
                                 ${exercise.sets} sets x ${exercise.reps} reps
                                 <br>
                                 ${exercise.rest_time} rest | Weight: ${exercise.weight} kg
+                                `}
                             </span>
                         </li>
                     `;
@@ -486,9 +488,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             <li>
                                 <strong>${exercise.name}</strong>
                                 <span>
+                                    ${exercise.reps === 'N/A' ? exercise.weight : `
                                     ${exercise.sets} sets x ${exercise.reps} reps
                                     <br>
                                     ${exercise.rest_time} rest | Weight: ${exercise.weight} kg
+                                    `}
                                 </span>
                             </li>
                         `;
