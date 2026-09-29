@@ -11,6 +11,7 @@
 - [Project structure](#project-structure)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Configuration](#configuration)
 - [Running the app](#running-the-app)
 - [API reference](#api-reference)
 - [Troubleshooting](#troubleshooting)
@@ -81,6 +82,7 @@ REPIN-/
 │   ├── script.js
 │   ├── style.css
 │   └── assets/             # Logo and loading animation
+├── .env.example            # Template for the backend settings
 ├── requirements.txt        # Python packages needed by the backend
 └── README.md
 ```
@@ -100,6 +102,7 @@ Python packages used by the backend (listed in [`requirements.txt`](requirements
 | `flask`           | Web server and API |
 | `flask-cors`      | Lets the frontend (port 8000) call the backend (port 5000) |
 | `python-dateutil` | Date calculations for the goal date |
+| `python-dotenv`   | Loads the settings from the `.env` file |
 
 ---
 
@@ -128,7 +131,27 @@ Python packages used by the backend (listed in [`requirements.txt`](requirements
    pip install -r requirements.txt
    ```
 
+4. **Create your settings file** from the template
+
+   ```bash
+   cp .env.example .env          # macOS / Linux
+   copy .env.example .env        # Windows
+   ```
+
 > On some systems the commands are `python3` and `pip3` instead of `python` and `pip`.
+
+---
+
+## Configuration
+
+The backend reads its settings from the `.env` file in the project root. This file is specific to your machine and is not committed to git; [`.env.example`](.env.example) is the shared template. If `.env` is missing, the defaults below are used.
+
+| Variable         | Default     | Description |
+|------------------|-------------|-------------|
+| `FLASK_RUN_HOST` | `127.0.0.1` | Address the backend listens on |
+| `FLASK_RUN_PORT` | `5000`      | Port the backend listens on. If you change it, also update the API URLs in `frontend/script.js`. |
+| `FLASK_DEBUG`    | `true`      | Auto-reload on code changes and detailed error pages. Set to `false` in production. |
+| `CORS_ORIGINS`   | `*`         | Websites allowed to call the API, separated by commas (`*` = any website) |
 
 ---
 
