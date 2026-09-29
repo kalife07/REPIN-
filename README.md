@@ -81,6 +81,7 @@ REPIN-/
 │   ├── script.js
 │   ├── style.css
 │   └── assets/             # Logo and loading animation
+├── requirements.txt        # Python packages needed by the backend
 └── README.md
 ```
 
@@ -92,7 +93,7 @@ REPIN-/
 - **pip**, Python's package installer (included with Python)
 - A modern web browser (Chrome, Firefox, Safari, Edge)
 
-Python packages used by the backend:
+Python packages used by the backend (listed in [`requirements.txt`](requirements.txt)):
 
 | Package           | Purpose |
 |-------------------|---------|
@@ -124,7 +125,7 @@ Python packages used by the backend:
 3. **Install the Python packages**
 
    ```bash
-   pip install flask flask-cors python-dateutil
+   pip install -r requirements.txt
    ```
 
 > On some systems the commands are `python3` and `pip3` instead of `python` and `pip`.
