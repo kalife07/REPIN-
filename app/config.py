@@ -1,0 +1,2 @@
+MONTH = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
+OPTIMAL_SLEEP = 8.5 #hours
