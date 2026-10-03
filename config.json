@@ -1,0 +1,14 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 5000,
+    "debug": true,
+    "cors_origins": ["*"]
+  },
+  "sleep": {
+    "optimal_hours": 8.5
+  },
+  "dates": {
+    "month_abbreviations": ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+  }
+}

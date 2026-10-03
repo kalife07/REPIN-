@@ -1,4 +1,6 @@
 import importlib
+import json
+import os
 
 import pytest
 
@@ -24,9 +26,42 @@ def load_config(monkeypatch):
     importlib.reload(config)
 
 
+@pytest.fixture
+def config_json():
+    with open(config.CONFIG_PATH) as config_file:
+        return json.load(config_file)
+
+
+def test_config_json_is_in_project_root():
+    assert os.path.dirname(config.CONFIG_PATH) == os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def test_config_json_has_all_settings(config_json):
+    server = config_json['server']
+    assert isinstance(server['host'], str)
+    assert isinstance(server['port'], int)
+    assert isinstance(server['debug'], bool)
+    assert isinstance(server['cors_origins'], list)
+    assert isinstance(config_json['sleep']['optimal_hours'], (int, float))
+    assert len(config_json['dates']['month_abbreviations']) == 12
+
+
 def test_constants():
     assert config.MONTH == ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
     assert config.OPTIMAL_SLEEP == 8.5
+
+
+def test_app_settings_come_from_config_json(config_json):
+    assert config.MONTH == config_json['dates']['month_abbreviations']
+    assert config.OPTIMAL_SLEEP == config_json['sleep']['optimal_hours']
+
+
+def test_server_defaults_come_from_config_json(load_config, config_json):
+    settings = load_config()
+    assert settings.HOST == config_json['server']['host']
+    assert settings.PORT == config_json['server']['port']
+    assert settings.DEBUG is config_json['server']['debug']
+    assert settings.CORS_ORIGINS == config_json['server']['cors_origins']
 
 
 def test_defaults_without_env(load_config):

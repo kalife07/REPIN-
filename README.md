@@ -82,7 +82,9 @@ REPIN-/
 │   ├── script.js
 │   ├── style.css
 │   └── assets/             # Logo and loading animation
-├── .env.example            # Template for the backend settings
+├── tests/                  # Automated tests (run with: pytest)
+├── config.json             # Shared app and server settings
+├── .env.example            # Template for machine-specific overrides
 ├── requirements.txt        # Python packages needed by the backend
 └── README.md
 ```
@@ -144,14 +146,28 @@ Python packages used by the backend (listed in [`requirements.txt`](requirements
 
 ## Configuration
 
-The backend reads its settings from the `.env` file in the project root. This file is specific to your machine and is not committed to git; [`.env.example`](.env.example) is the shared template. If `.env` is missing, the defaults below are used.
+Settings come from two files in the project root:
 
-| Variable         | Default     | Description |
-|------------------|-------------|-------------|
-| `FLASK_RUN_HOST` | `127.0.0.1` | Address the backend listens on |
-| `FLASK_RUN_PORT` | `5000`      | Port the backend listens on. If you change it, also update the API URLs in `frontend/script.js`. |
-| `FLASK_DEBUG`    | `true`      | Auto-reload on code changes and detailed error pages. Set to `false` in production. |
-| `CORS_ORIGINS`   | `*`         | Websites allowed to call the API, separated by commas (`*` = any website) |
+- **[`config.json`](config.json)**: the shared configuration, committed to git. It holds the defaults for everyone.
+- **`.env`**: optional overrides for your machine only, not committed to git ([`.env.example`](.env.example) is the template). A server setting in `.env` takes priority over `config.json`.
+
+**Server settings**
+
+| `config.json`         | `.env` override  | Default     | Description |
+|-----------------------|------------------|-------------|-------------|
+| `server.host`         | `FLASK_RUN_HOST` | `127.0.0.1` | Address the backend listens on |
+| `server.port`         | `FLASK_RUN_PORT` | `5000`      | Port the backend listens on. If you change it, also update the API URLs in `frontend/script.js`. |
+| `server.debug`        | `FLASK_DEBUG`    | `true`      | Auto-reload on code changes and detailed error pages. Set to `false` in production. |
+| `server.cors_origins` | `CORS_ORIGINS`   | `["*"]`     | Websites allowed to call the API (`*` = any website). In `.env`, separate them with commas. |
+
+**App settings** (`config.json` only)
+
+| `config.json`               | Default            | Description |
+|-----------------------------|--------------------|-------------|
+| `sleep.optimal_hours`       | `8.5`              | Hours of sleep used to calculate the wake-up time |
+| `dates.month_abbreviations` | `["JAN", …, "DEC"]` | Month names used in the goal date |
+
+Restart the backend after changing either file.
 
 ---
 
